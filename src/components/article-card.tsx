@@ -7,8 +7,10 @@ import {
   CardFooter,
   CardTitle,
   CardHeader,
+  CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import * as types from "@/types";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
@@ -19,7 +21,7 @@ interface ArticlePreviewCardProps {
 export default function ArticleCard({ data }: ArticlePreviewCardProps) {
   return (
     <Link href="/">
-      <Card className="rounded-lg  transition-all duration-300 hover:scale-105">
+      <Card className="rounded-lg transition-all duration-300 hover:scale-105 mb-4">
         <CardHeader>
           <div className="relative rounded-lg" style={{ paddingTop: "56.25%" }}>
             <Image
@@ -30,16 +32,25 @@ export default function ArticleCard({ data }: ArticlePreviewCardProps) {
             />
           </div>
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-row gap-4 items-center">
+        <CardContent className="flex flex-col items-start gap-2">
+          <Badge>{data.topic}</Badge>
+          <CardTitle className="text-lg">{data.title}</CardTitle>
+          <CardDescription>{data.excerpt}</CardDescription>
+        </CardContent>
+        <CardFooter>
+          <div className="flex flex-row gap-2 items-center">
             <Avatar>
               <AvatarImage src="https://avatars.githubusercontent.com/u/115940366?s=400&u=6947e85139ccbca2951c9e5c50116f26dfb8272e&v=4" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <p className="text-sm text-primary/80">{data.author}</p>
-              <p className="text-xs text-slate-500">
-                백엔드 개발자{" · "}
+              <div className="flex flex-row gap-1 items-baseline">
+                <p className="text-sm text-primary/80">{data.author}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  백엔드 개발자
+                </p>
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {data.createdAt.getFullYear() +
                   "-" +
                   (data.createdAt.getMonth() + 1).toString().padStart(2, "0") +
@@ -48,13 +59,8 @@ export default function ArticleCard({ data }: ArticlePreviewCardProps) {
               </p>
             </div>
           </div>
-          <CardTitle className="text-lg">{data.title}</CardTitle>
-        </CardContent>
-        <CardFooter className="flex-col items-start gap-4">
-          <div className="flex items-center justify-between text-sm text-slate-500">
-            {data.excerpt}
-          </div>
         </CardFooter>
+        <Separator />
       </Card>
     </Link>
   );
