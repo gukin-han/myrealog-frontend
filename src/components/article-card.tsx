@@ -27,7 +27,8 @@ export default function ArticleCard({ data }: ArticlePreviewCardProps) {
             <Image
               src={data.thumbnailUrl}
               alt=""
-              layout="fill"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
             />
           </div>

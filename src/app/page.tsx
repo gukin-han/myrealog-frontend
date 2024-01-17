@@ -2,7 +2,7 @@ import ArticleCardList from "@/components/article-card-list";
 import Container from "@/components/ui/container";
 import { dummyArticles } from "@/constants";
 
-export default function Home() {
+export default function Root() {
   return (
     <Container>
       <div className="space-y-10 pb-10">

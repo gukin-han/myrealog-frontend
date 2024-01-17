@@ -1,8 +1,12 @@
 import Container from "@/components/ui/container";
 import { ModeToggle } from "@/components/mode-toggle";
 import ProfileButton from "./profile-button";
+import LoginButton from "./login-button";
 
 import Link from "next/link";
+
+const session = false;
+const Profile = session ? ProfileButton : LoginButton;
 
 export default function Header() {
   return (
@@ -14,7 +18,7 @@ export default function Header() {
           </Link>
           <div className="flex flex-row items-center gap-4">
             <ModeToggle />
-            <ProfileButton />
+            <Profile />
           </div>
         </div>
       </Container>
