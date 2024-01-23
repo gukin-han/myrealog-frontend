@@ -1,6 +1,6 @@
 import Container from "@/components/ui/container";
 
-export default function SignupPage() {
+export default function Recent() {
   return (
     <Container>
       <div>Recent</div>

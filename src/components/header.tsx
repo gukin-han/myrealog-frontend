@@ -5,10 +5,9 @@ import LoginButton from "./login-button";
 
 import Link from "next/link";
 
-const session = false;
-const Profile = session ? ProfileButton : LoginButton;
-
 export default function Header() {
+  const session = false;
+
   return (
     <header className="sm:flex sm:justify-between py-3 px-4">
       <Container>
@@ -18,7 +17,7 @@ export default function Header() {
           </Link>
           <div className="flex flex-row items-center gap-4">
             <ModeToggle />
-            <Profile />
+            {session ? <ProfileButton />: <LoginButton />}
           </div>
         </div>
       </Container>
