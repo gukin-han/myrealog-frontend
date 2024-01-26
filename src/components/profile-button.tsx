@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthContext } from "@/components/provider/auth-provider";
+import * as actions from "@/actions";
 
 const ProfileButton = () => {
+  const { state, signin, signout } = useAuthContext();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -18,15 +24,25 @@ const ProfileButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Gukin Han</DropdownMenuLabel>
+        <DropdownMenuLabel>{state.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer">
           내 페이지
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">아티클 작성</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">프로필 설정</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          아티클 작성
+        </DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          프로필 설정
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">로그아웃</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          <form action={actions.signout} onSubmit={signout}>
+            <button className="w-full" type="submit">
+              로그아웃
+            </button>
+          </form>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

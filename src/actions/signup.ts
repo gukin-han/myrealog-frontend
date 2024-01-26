@@ -49,8 +49,8 @@ export async function signup(
 
   // post request to signup
   const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken");
-  if (!accessToken) redirect("/");
+  const signupToken = cookieStore.get("signupToken");
+  if (!signupToken) redirect("/");
 
   try {
     const response = await fetch(
@@ -59,7 +59,7 @@ export async function signup(
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken.value}`,
+          Authorization: `Bearer ${signupToken.value}`,
         },
         body: JSON.stringify(Object.fromEntries(formData)),
         credentials: "include",
@@ -67,5 +67,5 @@ export async function signup(
     );
   } catch (err) {}
 
-  redirect("/redirect");
+  redirect("/signin");
 }
