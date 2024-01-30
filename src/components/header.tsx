@@ -5,6 +5,7 @@ import UserAuthControl from "@/components/user-auth-control";
 import Link from "next/link";
 
 export default function Header() {
+  console.log("Header loaded");
 
   return (
     <header className="sm:flex sm:justify-between py-3 px-4">

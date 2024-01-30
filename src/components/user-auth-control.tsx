@@ -1,29 +1,27 @@
-"use client";
+import { cookies } from "next/headers";
 
 import ProfileButton from "@/components/profile-button";
-import LoginButton from "@/components/login-button";
-import { useAuthContext } from '@/components/provider/auth-provider';
-import { useEffect } from "react";
+import SignInModalButton from "@/components/signin-modal-button";
+import * as actions from "@/actions";
 
-export default function UserAuthControl() {
-  const { state, signin, signout } = useAuthContext();
+export default async function UserAuthControl() {
+  console.log("UserAuthControl loaded");
+  const accessToken = cookies().get("accessToken");
+  if (!accessToken || accessToken.value === "") return <SignInModalButton />;
 
-//   useEffect(() => {
-//     const getAuth = async () => {
+  try {
+    const data = await actions.getMe(accessToken.value);
+    console.log(data);
 
-//       try {
-//         const response = await fetch("/api/users/me");
-//         const result = await response.json();
-//         signin(result.data);
-
-//       } catch (error) {
-//         console.error("에러 발생:", error);
-//         return <ProfileButton />
-//       }
-//     };
-//     getAuth();
-
-//   }, []);
-
-  return state.isAuthenticated ? <ProfileButton /> : <LoginButton />;
+    return (
+      <ProfileButton
+        username={data.username}
+        displayName={data.displayName}
+        avatarUrl={data.avatarUrl}
+      />
+    );
+  } catch (error) {
+    // console.error(error); // muted
+    return <SignInModalButton />;
+  }
 }

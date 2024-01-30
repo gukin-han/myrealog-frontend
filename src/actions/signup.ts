@@ -48,24 +48,29 @@ export async function signup(
   }
 
   // post request to signup
-  const cookieStore = cookies();
-  const signupToken = cookieStore.get("signupToken");
-  if (!signupToken) redirect("/");
+  const signupToken = cookies().get("signupToken");
+  if (!signupToken) return redirect("/");
 
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/users`,
       {
-        method: "post",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${signupToken.value}`,
         },
         body: JSON.stringify(Object.fromEntries(formData)),
-        credentials: "include",
       }
     );
-  } catch (err) {}
 
-  redirect("/signin");
+    cookies().delete("signupToken");
+    // console.log(response.headers.getSetCookie()[0]);
+
+  } catch (error) {
+    console.error(error);
+  }
+
+
+  return redirect("/redirect");
 }

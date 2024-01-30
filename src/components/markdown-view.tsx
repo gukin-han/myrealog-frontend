@@ -1,11 +1,7 @@
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  dark,
-  materialDark,
-  darcula,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const CustomHeading1: Components["h1"] = ({ node, ...props }) => (
   <h1

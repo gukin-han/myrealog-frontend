@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import MarkdonwView from "@/components/markdown-view";
 
-export default function Write() {
+export default function WritePage() {
   const [markdown, setMarkdown] = useState("");
 
   return (

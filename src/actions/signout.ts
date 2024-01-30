@@ -5,5 +5,5 @@ import { cookies } from "next/headers";
 
 export async function signout() {
   cookies().delete("accessToken");
-  redirect("/");
+  return redirect("/redirect");
 }
