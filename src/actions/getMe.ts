@@ -1,11 +1,18 @@
+"use server";
+
+import { cookies } from "next/headers";
+
 type GetMeResponse = {
-  username: string;
-  displayName: string;
-  avatarUrl: string;
   status: number;
+  message: string;
+  data: {
+    username: string;
+    displayName: string;
+    avatarUrl: string;
+  };
 };
 
-export async function getMe(accessToken: string): Promise<GetMeResponse> {
+export async function getMe(accessToken: String): Promise<GetMeResponse> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/users/me`,
     {
@@ -14,8 +21,7 @@ export async function getMe(accessToken: string): Promise<GetMeResponse> {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-      // next: { revalidate: 10 }, // 백엔드 서버가 다운되면
-      cache: "no-store",
+      next: { revalidate: 10 },
     }
   );
 

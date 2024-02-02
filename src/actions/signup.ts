@@ -49,7 +49,7 @@ export async function signup(
 
   // post request to signup
   const signupToken = cookies().get("signupToken");
-  if (!signupToken) return redirect("/");
+  if (!signupToken || signupToken.value === "") return redirect("/");
 
   try {
     const response = await fetch(
@@ -64,13 +64,22 @@ export async function signup(
       }
     );
 
-    cookies().delete("signupToken");
-    // console.log(response.headers.getSetCookie()[0]);
+    if (!response.ok) {
+      console.log("get me error");
+    }
 
+    const data = await response.json(); 
+    if (data.data.type == "ACCESS_TOKEN") {
+      cookies().set("accessToken", data.data.value, {
+        httpOnly: true,
+        path: "/",
+      });
+      cookies().delete("signupToken");
+    }
+    
   } catch (error) {
-    console.error(error);
+    console.log("get me error");
   }
-
 
   return redirect("/redirect");
 }

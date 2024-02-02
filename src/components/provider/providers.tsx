@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
 import ThemeProvider from "./theme-provider";
-import AuthProvider from "./auth-provider";
 
-export default function Providers({ children }: { children: ReactNode }): JSX.Element {
+export default function Providers({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element {
   return (
     <ThemeProvider
       attribute="class"
@@ -10,7 +13,7 @@ export default function Providers({ children }: { children: ReactNode }): JSX.El
       enableSystem
       disableTransitionOnChange
     >
-      <AuthProvider>{children}</AuthProvider>
+      {children}
     </ThemeProvider>
   );
 }

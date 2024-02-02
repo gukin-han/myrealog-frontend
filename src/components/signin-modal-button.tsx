@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,9 +13,19 @@ import {
 import SignInButton from "@/components/signin-button";
 import * as actions from "@/actions";
 
-export default function SignInModalButton() {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+export default function SignInModalButton({
+  errorMessage,
+}: {
+  errorMessage?: String;
+}) {
+  if (errorMessage) toast.error(errorMessage);
+
   return (
     <Dialog>
+      <ToastContainer />
       <DialogTrigger asChild>
         <Button>로그인</Button>
       </DialogTrigger>

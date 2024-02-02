@@ -29,7 +29,9 @@ const ProfileButton = ({
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={avatarUrl} />
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>
+            {avatarUrl !== "" ? avatarUrl : displayName[0]}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -50,7 +52,7 @@ const ProfileButton = ({
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <form action={actions.signout} className="">
-          <DropdownMenuItem className="cursor-pointer" >
+          <DropdownMenuItem className="cursor-pointer">
             <SignOutButton />
           </DropdownMenuItem>
         </form>

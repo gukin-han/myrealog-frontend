@@ -1,27 +1,27 @@
-import { cookies } from "next/headers";
-
 import ProfileButton from "@/components/profile-button";
 import SignInModalButton from "@/components/signin-modal-button";
 import * as actions from "@/actions";
+import { cookies } from "next/headers";
 
 export default async function UserAuthControl() {
-  console.log("UserAuthControl loaded");
   const accessToken = cookies().get("accessToken");
-  if (!accessToken || accessToken.value === "") return <SignInModalButton />;
+  if (!accessToken || accessToken.value === "") return <SignInModalButton />
 
   try {
-    const data = await actions.getMe(accessToken.value);
-    console.log(data);
+    const response = await actions.getMe(accessToken.value);
 
     return (
       <ProfileButton
-        username={data.username}
-        displayName={data.displayName}
-        avatarUrl={data.avatarUrl}
+        username={response.data.username}
+        displayName={response.data.displayName}
+        avatarUrl={response.data.avatarUrl}
       />
     );
+
   } catch (error) {
-    // console.error(error); // muted
-    return <SignInModalButton />;
+
+    if (error instanceof Error) {
+      return <SignInModalButton errorMessage={error.message}/>;
+    }
   }
 }
