@@ -77,7 +77,7 @@ const CodeBlock: Components["code"] = ({
 };
 
 interface MarkdownViewProps {
-  children: string;
+  children?: string;
 }
 
 export default function MarkdownView({ children }: MarkdownViewProps) {

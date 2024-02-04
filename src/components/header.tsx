@@ -8,10 +8,10 @@ export default function Header() {
   console.log("Header loaded");
 
   return (
-    <header className="sm:flex sm:justify-between py-3 px-4">
+    <header className="sm:flex sm:justify-between">
       <Container>
         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
-          <Link href="/" className="ml-4 lg:ml-0">
+          <Link href="/">
             <span className="text-xl font-bold">MyReaLog</span>
           </Link>
           <div className="flex flex-row items-center gap-4">

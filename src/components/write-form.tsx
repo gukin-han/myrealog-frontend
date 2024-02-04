@@ -12,7 +12,7 @@ import * as actions from "@/actions";
 export default function WriteForm() {
   const [markdown, setMarkdown] = useState("");
 
-  const [formState, action] = useFormState(actions.publish, {
+  const [formState, action] = useFormState(actions.createArticle, {
     errors: {},
   });
 

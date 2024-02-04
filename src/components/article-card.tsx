@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArticleCardDto, GetArticlesResponse } from "@/types";
 
 import {
   Card,
@@ -14,13 +15,15 @@ import { Separator } from "@/components/ui/separator";
 import * as types from "@/types";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
-interface ArticlePreviewCardProps {
-  data: types.ArticlePreview;
+interface ArticleCardProps {
+  data: ArticleCardDto;
 }
 
-export default function ArticleCard({ data }: ArticlePreviewCardProps) {
+export default function ArticleCard({ data }: ArticleCardProps) {
+  const createdDate = new Date(data.createdDate);
+  const uri: string = `\\${data.username}\\${data.slug}`;
   return (
-    <Link href="/">
+    <Link href={uri}>
       <Card className="rounded-lg transition-all duration-300 hover:scale-105 mb-4">
         <CardHeader>
           <div className="relative rounded-lg" style={{ paddingTop: "56.25%" }}>
@@ -34,7 +37,7 @@ export default function ArticleCard({ data }: ArticlePreviewCardProps) {
           </div>
         </CardHeader>
         <CardContent className="flex flex-col items-start gap-2">
-          <Badge>{data.topic}</Badge>
+          {/*<Badge>{data.topic}</Badge>*/}
           <CardTitle className="text-lg">{data.title}</CardTitle>
           <CardDescription>{data.excerpt}</CardDescription>
         </CardContent>
@@ -46,17 +49,14 @@ export default function ArticleCard({ data }: ArticlePreviewCardProps) {
             </Avatar>
             <div className="flex flex-col">
               <div className="flex flex-row gap-1 items-baseline">
-                <p className="text-sm text-primary/80">{data.author}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  백엔드 개발자
-                </p>
+                <p className="text-sm text-primary/80">{data.displayName}</p>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                {data.createdAt.getFullYear() +
+                {createdDate.getFullYear() +
                   "-" +
-                  (data.createdAt.getMonth() + 1).toString().padStart(2, "0") +
+                  (createdDate.getMonth() + 1).toString().padStart(2, "0") +
                   "-" +
-                  data.createdAt.getDate().toString().padStart(2, "0")}
+                  createdDate.getDate().toString().padStart(2, "0")}
               </p>
             </div>
           </div>

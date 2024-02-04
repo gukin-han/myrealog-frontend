@@ -2,7 +2,8 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 const publishSchema = z.object({
   title: z
@@ -21,9 +22,9 @@ interface PublishFormState {
   };
 }
 
-export async function publish(
+export async function createArticle(
   formState: PublishFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<PublishFormState> {
   const result = publishSchema.safeParse({
     title: formData.get("title"),
@@ -39,33 +40,27 @@ export async function publish(
 
   const accessToken = cookies().get("accessToken");
   if (!accessToken || accessToken.value === "") return redirect("/");
+  let redirectUrl = "";
 
-  // 수정
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken.value}`,
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
-      }
-    );
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken.value}`,
+      },
+      body: JSON.stringify(Object.fromEntries(formData)),
+    },
+  );
 
-    const data = await response.json();
-    console.log(data);
+  console.log();
 
-    if (!response.ok) {
-      console.log("get me error");
-    }
-
-  } catch (error) {
-    console.log("get me error");
+  const redirectUri = response.headers.get("Location");
+  if (!response.ok) {
+    throw new Error("에러가 발생했습니다.");
   }
 
-
-  return redirect("/redirect");
-
+  revalidatePath("/");
+  return redirect(redirectUri ? redirectUri : "/");
 }

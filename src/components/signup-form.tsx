@@ -3,7 +3,7 @@
 import { redirect, useSearchParams } from "next/navigation";
 import { useFormState } from "react-dom";
 
-import { TypographyH1 } from "@/components/ui/typography/typography-h1";
+import { TypographyH1 } from "@/components/typography/typography-h1";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
