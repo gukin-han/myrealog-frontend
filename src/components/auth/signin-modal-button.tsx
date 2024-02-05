@@ -10,11 +10,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SignInButton from "@/components/signin-button";
+import SignInButton from "@/components/auth/signin-button";
 import * as actions from "@/actions";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "@/components/provider/auth-provider";
+import { useEffect } from "react";
 
 export default function SignInModalButton({
   errorMessage,
@@ -22,6 +24,11 @@ export default function SignInModalButton({
   errorMessage?: String;
 }) {
   if (errorMessage) toast.error(errorMessage);
+
+  const { signout } = useAuthContext();
+  useEffect(() => {
+    signout();
+  }, []);
 
   return (
     <Dialog>
