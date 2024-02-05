@@ -17,7 +17,6 @@ type GetArticleResponse = {
 };
 
 export async function getArticle(
-  accessToken: string,
   username: string,
   slug: string,
 ): Promise<GetArticleResponse> {
@@ -27,7 +26,6 @@ export async function getArticle(
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
     },
   );
