@@ -1,6 +1,6 @@
 import Container from "@/components/ui/container";
 import { ModeToggle } from "@/components/mode-toggle";
-import UserAuthControl from "@/components/user-auth-control";
+import UserAuthControl from "@/components/auth/user-auth-control";
 
 import Link from "next/link";
 

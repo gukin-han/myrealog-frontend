@@ -54,8 +54,6 @@ export async function createArticle(
     },
   );
 
-  console.log();
-
   const redirectUri = response.headers.get("Location");
   if (!response.ok) {
     throw new Error("에러가 발생했습니다.");
