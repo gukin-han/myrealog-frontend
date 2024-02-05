@@ -1,7 +1,8 @@
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import React from "react";
 
 const CustomHeading1: Components["h1"] = ({ node, ...props }) => (
   <h1
@@ -43,36 +44,29 @@ const CustomList: Components["ul"] = ({ node, ...props }) => (
   <ul className="my-6 ml-6 list-disc [&>li]:mt-2" {...props} />
 );
 
-const CustomCode: Components["code"] = ({ node, ...props }) => (
-  <code
-    className="relative bg-slate-100 dark:bg-slate-800 rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
-    {...props}
-  />
-);
-
 const CodeBlock: Components["code"] = ({
-  node,
-  inline,
   className,
+  inline,
   children,
   ...props
+}: {
+  className?: string;
+  children?: React.ReactNode;
+  [propName: string]: any;
 }) => {
   const match = /language-(\w+)/.exec(className || "");
-
   return !inline && match ? (
     <SyntaxHighlighter
-      style={darcula}
+      style={dracula} // Using the dark theme
       language={match[1]}
       PreTag="div"
       {...props}
-      className="text-sm"
+      className={`text-sm w-full ${props.className || ""}`} // Ensure className is applied
     >
       {String(children).replace(/\n$/, "")}
     </SyntaxHighlighter>
   ) : (
-    <code className={className ? className : ""} {...props}>
-      {children}
-    </code>
+    <code {...props}>{children}</code>
   );
 };
 
