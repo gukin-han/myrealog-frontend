@@ -1,16 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: false,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "velog.velcdn.com",
-        port: "",
-        pathname: "/**",
-      },
-    ],
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
