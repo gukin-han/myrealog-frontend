@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 type Props = { children: React.ReactNode };
 
 export default function RootLayout({ children }: Props) {
-  console.log("layout rendered");
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
