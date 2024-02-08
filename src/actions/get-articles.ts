@@ -11,6 +11,7 @@ export async function getArticles(): Promise<GetArticlesResponse> {
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 300 },
     },
   );
 

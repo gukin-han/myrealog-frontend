@@ -1,17 +1,17 @@
 "use client";
+
 import { useState } from "react";
 import { useFormState } from "react-dom";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import MarkdonwView from "@/components/markdown-view";
+import MarkdownView from "@/components/markdown-view";
 import FormButton from "@/components/form-button";
 
 import * as actions from "@/actions";
 
 export default function WriteForm() {
   const [markdown, setMarkdown] = useState("");
-
   const [formState, action] = useFormState(actions.createArticle, {
     errors: {},
   });
@@ -33,7 +33,7 @@ export default function WriteForm() {
             onChange={(e) => setMarkdown(e.target.value)}
           />
           <div className="hidden xl:block xl:max-w-xl overflow-hidden overflow-y-auto max-h-[100%]">
-            <MarkdonwView>{markdown}</MarkdonwView>
+            <MarkdownView>{markdown}</MarkdownView>
           </div>
         </div>
         <Input
@@ -41,7 +41,7 @@ export default function WriteForm() {
           placeholder="Excerpt"
           className="xl:max-w-xl bg-slate-100 dark:bg-slate-800"
         />
-        <FormButton>Publish</FormButton>
+        <FormButton>완료</FormButton>
       </div>
     </form>
   );

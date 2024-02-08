@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import {
@@ -9,35 +11,38 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import SignOutButton from "@/components/signout-button";
+import SignOutButton from "@/components/auth/signout-button";
 
 import * as actions from "@/actions";
+import { useAuthContext } from "@/components/provider/auth-provider";
+import { useEffect } from "react";
 
 interface ProfileButtonProps {
-  username: string;
-  displayName: string;
-  avatarUrl: string;
+  userData: { username: string; displayName: string; avatarUrl: string };
 }
 
-const ProfileButton = ({
-  username,
-  displayName,
-  avatarUrl,
-}: ProfileButtonProps) => {
+const ProfileButton = ({ userData }: ProfileButtonProps) => {
+  const { signin } = useAuthContext();
+  useEffect(() => {
+    signin(userData);
+  }, []);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={avatarUrl} />
+          <AvatarImage src={userData.avatarUrl} />
           <AvatarFallback>
-            {avatarUrl !== "" ? avatarUrl : displayName[0]}
+            {userData.avatarUrl !== ""
+              ? userData.avatarUrl
+              : userData.displayName[0]}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>{displayName}</DropdownMenuLabel>
+        <DropdownMenuLabel>{userData.displayName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href={`/@${username}`}>
+        <Link href={`/${userData.username}`}>
           <DropdownMenuItem className="cursor-pointer">
             내 페이지
           </DropdownMenuItem>

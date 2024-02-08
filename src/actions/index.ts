@@ -1,7 +1,9 @@
 export { signup } from "./signup";
 export { signin } from "./signin";
 export { signout } from "./signout";
-export { getMe } from "./getMe";
+export { getMe } from "./get-me";
 export { createArticle } from "./create-article";
-export { getArticle } from "./getArticle";
+export { getArticle } from "./get-article";
 export { getArticles } from "./get-articles";
+export { deleteArticle } from "./delete-article";
+export { updateArticle } from "./update-article";
