@@ -9,7 +9,7 @@ export async function deleteArticle(
   username: string,
   slug: string,
 ) {
-  const accessToken = cookies().get("accessToken");
+  const accessToken = cookies().get("ACCESS_TOKEN");
   if (!accessToken || accessToken.value === "") return redirect("/");
 
   const response = await fetch(
