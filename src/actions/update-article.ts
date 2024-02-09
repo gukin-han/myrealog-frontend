@@ -49,7 +49,7 @@ export async function updateArticle(
   if (!accessToken || accessToken.value === "") return redirect("/");
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles/${articleId}`,
+    `${process.env.BACK_END_PUBLIC_BASE_URL}/api/v1/articles/${articleId}`,
     {
       method: "PUT",
       headers: {
