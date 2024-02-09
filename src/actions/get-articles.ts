@@ -5,7 +5,7 @@ import { GetArticlesResponse } from "@/types";
 
 export async function getArticles(): Promise<GetArticlesResponse> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles/recent`,
+    `${process.env.BACK_END_PUBLIC_BASE_URL}/api/v1/articles/recent`,
     {
       method: "GET",
       headers: {

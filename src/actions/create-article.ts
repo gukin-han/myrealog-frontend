@@ -42,7 +42,7 @@ export async function createArticle(
   if (!accessToken || accessToken.value === "") return redirect("/");
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles`,
+    `${process.env.BACK_END_PUBLIC_BASE_URL}/api/v1/articles`,
     {
       method: "POST",
       headers: {

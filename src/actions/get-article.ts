@@ -21,7 +21,7 @@ export async function getArticle(
   slug: string,
 ): Promise<GetArticleResponse> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles/${username}/${slug}`,
+    `${process.env.BACK_END_PUBLIC_BASE_URL}/api/v1/articles/${username}/${slug}`,
     {
       method: "GET",
       headers: {

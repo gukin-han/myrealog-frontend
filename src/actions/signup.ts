@@ -53,7 +53,7 @@ export async function signup(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/users`,
+      `${process.env.BACK_END_PUBLIC_BASE_URL}/api/v1/users`,
       {
         method: "POST",
         headers: {
