@@ -42,7 +42,7 @@ export default function SignInModalButton({
           <DialogTitle>로그인</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <form action={actions.signin}>
+        <form action={actions.signIn.bind(null, "google")}>
           <SignInButton />
         </form>
         <DialogFooter className="text-sm text-slate-500 dark:text-slate-400">

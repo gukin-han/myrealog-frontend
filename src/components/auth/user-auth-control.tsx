@@ -4,7 +4,7 @@ import * as actions from "@/actions";
 import { cookies } from "next/headers";
 
 export default async function UserAuthControl() {
-  const accessToken = cookies().get("accessToken");
+  const accessToken = cookies().get("ACCESS_TOKEN");
   if (!accessToken || accessToken.value === "") return <SignInModalButton />;
 
   try {

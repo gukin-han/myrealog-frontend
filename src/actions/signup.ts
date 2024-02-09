@@ -32,7 +32,7 @@ interface SignupFormState {
 
 export async function signup(
   formState: SignupFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<SignupFormState> {
   // validate form
   const result = signupSchema.safeParse({
@@ -48,7 +48,7 @@ export async function signup(
   }
 
   // post request to signup
-  const signupToken = cookies().get("signupToken");
+  const signupToken = cookies().get("SIGNUP_TOKEN");
   if (!signupToken || signupToken.value === "") return redirect("/");
 
   try {
@@ -61,22 +61,21 @@ export async function signup(
           Authorization: `Bearer ${signupToken.value}`,
         },
         body: JSON.stringify(Object.fromEntries(formData)),
-      }
+      },
     );
 
     if (!response.ok) {
       console.log("get me error");
     }
 
-    const data = await response.json(); 
+    const data = await response.json();
     if (data.data.type == "ACCESS_TOKEN") {
-      cookies().set("accessToken", data.data.value, {
+      cookies().set("ACCESS_TOKEN", data.data.value, {
         httpOnly: true,
         path: "/",
       });
-      cookies().delete("signupToken");
+      cookies().delete("SIGNUP_TOKEN");
     }
-    
   } catch (error) {
     console.log("get me error");
   }

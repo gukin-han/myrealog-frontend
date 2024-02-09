@@ -1,5 +1,5 @@
 export { signup } from "./signup";
-export { signin } from "./signin";
+export { signIn } from "./signIn";
 export { signout } from "./signout";
 export { getMe } from "./get-me";
 export { createArticle } from "./create-article";

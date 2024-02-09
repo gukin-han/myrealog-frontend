@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 const publishSchema = z.object({
@@ -38,9 +38,8 @@ export async function createArticle(
     };
   }
 
-  const accessToken = cookies().get("accessToken");
+  const accessToken = cookies().get("ACCESS_TOKEN");
   if (!accessToken || accessToken.value === "") return redirect("/");
-  let redirectUrl = "";
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/articles`,
